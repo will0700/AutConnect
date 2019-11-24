@@ -1,12 +1,9 @@
 package com.autconnect.services;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.autconnect.models.Role;
 import com.autconnect.models.User;
 import com.autconnect.repositories.RoleRepository;
 import com.autconnect.repositories.UserRepository;
@@ -15,19 +12,21 @@ import com.autconnect.repositories.UserRepository;
 public class UserService {
 	@Autowired UserRepository userRepository;
 	@Autowired RoleRepository roleRepository;
-	public User registerUser(User newUser, String roleString) {
-		List<Role> roles = new ArrayList<Role>();
-		if (roleString.equals("supervisor")) {
-			Role role = this.roleRepository.findRoleById((long) 1);
-			roles.add(role);
-		} else if (roleString.equals("therapist")) {
-			Role role = this.roleRepository.findRoleById((long) 2);
-			roles.add(role);
-		} else if (roleString.equals("parent")) {
-			Role role = this.roleRepository.findRoleById((long) 3);
-			roles.add(role);
+	@Autowired BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	public User findByEmail(String email) {
+		return this.userRepository.findByEmail(email);
+    }
+	
+	public void createUser(User user, String role) {
+		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		if (role.equals("supervisor")) {
+			user.setRoles(this.roleRepository.findByName("ROLE_SUPERVISOR"));
+		} else if (role.equals("therapist")) {
+			user.setRoles(this.roleRepository.findByName("ROLE_THERAPIST"));
+		} else if (role.equals("parent")) {
+			user.setRoles(this.roleRepository.findByName("ROLE_PARENT"));
 		}
-		newUser.setRoles(roles);
-		return this.userRepository.save(newUser);
+		this.userRepository.save(user);
 	}
 }
