@@ -33,11 +33,11 @@ public class TestController {
 		}
 	}
 	
-//	@PostMapping("/testing/login")
-//	public String testLogin(@RequestParam(value="email") String email, @RequestParam(value="password") String password, HttpSession session) {
-//		this.userService.loginUser(email, password)
-//		return "";
-//	}
+	@PostMapping("/testing/login")
+	public String testLogin(@RequestParam(value="email") String email, @RequestParam(value="password") String password, HttpSession session) {
+		this.userService.loginUser(email, password);
+		return "";
+	}
 	
 	@GetMapping("/testing/dashboard")
 	public String testDashboard(HttpSession session) {
