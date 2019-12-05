@@ -17,6 +17,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="clients")
@@ -24,7 +25,7 @@ public class Client {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	@NotBlank(message="Please provide a Client ID")
+	@NotNull(message="Please provide a Client ID")
 	private Long clientID;
 	@NotBlank(message="Please provide a First Initial")
 	private String firstInitial;
