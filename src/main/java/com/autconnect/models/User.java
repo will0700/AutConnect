@@ -65,22 +65,6 @@ public class User {
     @OneToMany(mappedBy="parent", fetch=FetchType.LAZY)
     private List<Client> clientsP;
     
-    //Users to Users
-    @ManyToMany(fetch=FetchType.LAZY)
-    @JoinTable(
-        name="supervisor_therapist", 
-        joinColumns = @JoinColumn(name="supervisor_id"), 
-        inverseJoinColumns = @JoinColumn(name="therapist_id")
-    )
-    private List<Client> supervisors;
-    
-    @ManyToMany(fetch=FetchType.LAZY)
-    @JoinTable(
-        name="supervisor_therapist", 
-        joinColumns = @JoinColumn(name="therapist_id"), 
-        inverseJoinColumns = @JoinColumn(name="supervisor_id")
-    )
-    private List<Client> therapists;
     
     //Getters and Setters
   	@PrePersist
@@ -162,17 +146,5 @@ public class User {
 	}
 	public void setClientsP(List<Client> clientsP) {
 		this.clientsP = clientsP;
-	}
-	public List<Client> getSupervisors() {
-		return supervisors;
-	}
-	public void setSupervisors(List<Client> supervisors) {
-		this.supervisors = supervisors;
-	}
-	public List<Client> getTherapists() {
-		return therapists;
-	}
-	public void setTherapists(List<Client> therapists) {
-		this.therapists = therapists;
 	}
 }

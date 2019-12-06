@@ -21,6 +21,8 @@ public class TherapistClient {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	private Boolean pending = true;
+	
 	@Column(updatable=false)
     private Date createdAt;
     private Date updatedAt;
@@ -71,5 +73,11 @@ public class TherapistClient {
 	}
 	public void setClient(Client client) {
 		this.client = client;
+	}
+	public Boolean getPending() {
+		return pending;
+	}
+	public void setPending(Boolean pending) {
+		this.pending = pending;
 	}
 }
