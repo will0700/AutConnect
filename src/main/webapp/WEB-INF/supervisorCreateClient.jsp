@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
@@ -25,9 +26,14 @@
 				<form:input path="firstInitial" type="text" maxLength="1" /> 
 			</div>
 			<div>
-				<form:label path="lastInitial">Las Initial</form:label>
+				<form:label path="lastInitial">Last Initial</form:label>
 				<form:errors path="lastInitial" />
 				<form:input path="lastInitial" type="text" maxLength="1" /> 
+			</div>
+			<div>
+				<form:label path="therapists">Therapist</form:label>
+				<form:errors path="therapists" />
+				<form:input path="therapists" type="checkboxes" maxLength="1" /> 
 			</div>
 			<form:input path="supervisor" type="hidden" value="${currentUser.id}" />
 			<input type="submit" value="Create Client">

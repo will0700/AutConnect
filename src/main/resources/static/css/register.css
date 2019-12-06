@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+
+.title {
+	text-align: center;
+	font-family: 'Montserrat', sans-serif;
+	
+}
+.login{
+	text-align: left;
+	font-family: 'Montserrat', sans-serif;
+}
+.container{
+	padding:100px;
+	margin-top: 10px;
+}
+.role{
+	padding:10px;
+}
+.radio{
+	padding:15px;
+	display:inline-block;
+}
+.reg {
+	width:300px;
+	margin-right: 70px;
+	display:inline;
+}
+.button{
+	margin-top:10px;
+	margin-left:70px;
+}
+#logoutForm{
+	margin-top: 20px;
+	margin-left: 20px;
+}

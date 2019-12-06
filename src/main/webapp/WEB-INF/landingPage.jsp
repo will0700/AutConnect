@@ -8,16 +8,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>AutConnect</title>
 </head>
 <body>
-<h1>Welcome to AutConnect.
-Connecting families, therapists, and supervisors to improve A.B.A. Therapy
-and keep progress consistent.</h1>
-
 	<form id="logoutForm" method="POST" action="/logout">
        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
        <input type="submit" value="Logout!" />
    </form>
+<h1>Welcome to AutConnect.
+Connecting families, therapists, and supervisors to improve A.B.A. Therapy
+and keep progress consistent.</h1>
+
+
 </body>
 </html>
