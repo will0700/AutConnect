@@ -1,5 +1,8 @@
 package com.autconnect.services;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,10 +17,6 @@ public class UserService {
 	@Autowired RoleRepository roleRepository;
 	@Autowired BCryptPasswordEncoder bCryptPasswordEncoder;
 	
-	public User findByEmail(String email) {
-		return this.userRepository.findByEmail(email);
-    }
-	
 	public void createUser(User user, String role) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		if (role.equals("supervisor")) {
@@ -28,5 +27,22 @@ public class UserService {
 			user.setRoles(this.roleRepository.findByName("ROLE_PARENT"));
 		}
 		this.userRepository.save(user);
+	}
+	
+	public User findByEmail(String email) {
+		return this.userRepository.findByEmail(email);
+    }
+		
+	public User findById(Long id) {
+		Optional<User> optionalUser = this.userRepository.findById(id);
+		if (optionalUser.isPresent()) {
+			return optionalUser.get();
+		} else {
+			return null;
+		}
+	}
+	
+	public List<User> findAllTherapists(){
+		return this.userRepository.findByRoles_Name("ROLE_THERAPIST");
 	}
 }
