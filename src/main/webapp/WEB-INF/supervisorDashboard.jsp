@@ -11,15 +11,11 @@
 <title>Supervisor Dashobard</title>
 </head>
 <body>
-	<div>
-		<h3>client 1</h3>
-	</div>
-	<div>	
-		<h3>client 2</h3>
-	</div>
-	<div>
-		<h3>client 3</h3>
-	</div>
+	<c:forEach items="${currentUser.clientsS}" var="client">
+		<div>
+			<a href="/supervisor/clients/${client.id}"><c:out value="${client.firstInitial}"/>.<c:out value="${client.lastInitial}"/>.</a>
+		</div>
+	</c:forEach>
 	
 	<a href = "/supervisor/clients/create">New Client</a>
 	<a href = "/supervisor/clients/remove">Remove Client</a>

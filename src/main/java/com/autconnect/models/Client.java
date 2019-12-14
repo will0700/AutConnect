@@ -13,11 +13,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="clients")
@@ -25,8 +25,8 @@ public class Client {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	@NotNull(message="Please provide a Client ID")
-	private Long clientID;
+	@NotBlank(message="Please provide a Client ID")
+	private String clientID;
 	@NotBlank(message="Please provide a First Initial")
 	private String firstInitial;
 	@NotBlank(message="Please provide a Last Initial")
@@ -42,7 +42,7 @@ public class Client {
     
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-        name="therapist_client", 
+        name="therapist_clients", 
         joinColumns = @JoinColumn(name="client_id"), 
         inverseJoinColumns = @JoinColumn(name="therapist_id")
     )
@@ -51,6 +51,9 @@ public class Client {
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="parent_id")
     private User parent;
+    
+    @OneToMany(mappedBy="client", fetch=FetchType.LAZY)
+    private List<Behavior> behaviors;
     
     
     //Getters and Setters
@@ -68,10 +71,10 @@ public class Client {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getClientID() {
+	public String getClientID() {
 		return clientID;
 	}
-	public void setClientID(Long clientID) {
+	public void setClientID(String clientID) {
 		this.clientID = clientID;
 	}
 	public String getFirstInitial() {

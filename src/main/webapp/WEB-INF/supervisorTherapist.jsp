@@ -11,26 +11,35 @@
 <title>Supervisor Therapist</title>
 </head>
 <body>
-	<h4>
-		<c:out value="${therapist.firstName}"></c:out>
-		<c:out value="${therapist.lastName}"></c:out>
-		
-	</h4>
-	<h4>
-	Date:
-		<c:out value="${created_At}"></c:out>
-	</h4>
-	
-	<h4>
-		<a href="/supervisor/client/{id}/remove"></a>Remove
-	</h4>
-	
 	<div>
-		<form:label path="therapist">Add Therapist</form:label>
-		<form:errors path="therapist"/>
-		<form:input path="therapist" type="text"/>
+		<h2>Therapists for <c:out value="${client.firstInitial}" />.<c:out value="${client.lastInitial}" />. </h2>
 	</div>
-	<form:input path="therapist" type="hidden" value="${currentUser.id}" />
-	<input type="submit" value="Add Therapist">
+	<div>
+		<h4>Current Therapists</h4>
+		<c:forEach items="${client.therapists}" var="therapist">
+			<div>
+				<c:out value="${therapist.firstName}"></c:out>
+				<c:out value="${therapist.lastName}"></c:out>
+				<a href="/supervisor/clients/${client.id}/therapists/remove/${therapist.id}">remove</a>
+			</div>
+		</c:forEach>	
+	</div>
+	<br>
+	<br>
+	<br>
+	<div>
+		<h4>Assign therapists</h4>
+		<form action="/supervisor/clients/${client.id}/therapists/add" method="post">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+			<c:forEach items="${notTherapists}" var="notTherapist">
+					<input type="checkbox" name="therapistsAdded" value="${notTherapist.id}">
+					<c:out value="${notTherapist.firstName}" /> <c:out value="${notTherapist.lastName}" />
+					<br>
+			</c:forEach>
+			<input type="submit">
+		</form>
+	</div>
+		
+		
 </body>
 </html>

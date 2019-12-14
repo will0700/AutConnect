@@ -1,5 +1,6 @@
 package com.autconnect.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.autconnect.models.Client;
 import com.autconnect.models.User;
 import com.autconnect.repositories.RoleRepository;
 import com.autconnect.repositories.UserRepository;
@@ -44,5 +46,8 @@ public class UserService {
 	
 	public List<User> findAllTherapists(){
 		return this.userRepository.findByRoles_Name("ROLE_THERAPIST");
+	}
+	public List<User> findNotTherapists(Client client){
+		return this.userRepository.findByNotTherapist(client);
 	}
 }
