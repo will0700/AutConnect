@@ -12,19 +12,19 @@
 <body>
 	<h3>Client Icon</h3>
 	<div>
-		<a href = "/supervisor/clients/{id}/therapist">Therapist</a>
+		<a href = "/supervisor/clients/${client.id}/therapist">Therapist</a>
 	</div>
 	<div>
-		<a href = "/supervisor/clients/{id}/targetGoal">Target Goals</a>
+		<a href = "/supervisor/clients/${client.id}/targetGoal">Target Goals</a>
 	</div>
 	<div>
-		<a href = "/supervisor/clients/{id}/bx">Bx</a>
+		<a href = "/supervisor/clients/${client.id}/bx">Bx</a>
 	</div>
 	<div>
-		<a href = "/supervisor/clients/{id}/dailyNotes">Daily Notes</a>
+		<a href = "/supervisor/clients/${client.id}/dailyNotes">Daily Notes</a>
 	</div>
 	<div>
-		<a href = "/supervisor/clients/{id}/archive">Archive</a>
+		<a href = "/supervisor/clients/${client.id}/archive">Archive</a>
 	</div>
 </body>
 </html>

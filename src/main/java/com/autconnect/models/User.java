@@ -56,7 +56,7 @@ public class User {
     
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-        name="therapist_client", 
+        name="therapist_clients", 
         joinColumns = @JoinColumn(name="therapist_id"), 
         inverseJoinColumns = @JoinColumn(name="client_id")
     )

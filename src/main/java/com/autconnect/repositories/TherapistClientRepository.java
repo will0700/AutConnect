@@ -12,6 +12,7 @@ import com.autconnect.models.User;
 @Repository
 public interface TherapistClientRepository extends CrudRepository<TherapistClient, Long>{
 	List<TherapistClient> findByClient(Client client);
-	void deleteByClientAndTherapist(Client client, User therapist);
+	Long deleteByClientAndTherapist(Client client, User therapist);
 	List<TherapistClient> findByTherapistAndPending(User therapist, Boolean pending);
+	TherapistClient findByTherapistAndClient(User therapist, Client client);
 }

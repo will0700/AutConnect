@@ -15,7 +15,7 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="therapist_client")
+@Table(name="therapist_clients")
 public class TherapistClient {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -34,8 +34,14 @@ public class TherapistClient {
 	@JoinColumn(name="client_id")
 	private Client client;
 	
+	//Constructor
+	public TherapistClient(){}
+	public TherapistClient(Client client, User therapist){
+		this.client = client;
+		this.therapist = therapist;
+	}
 	
-  //Getters and Setters
+    //Getters and Setters
   	@PrePersist
   	protected void onCreate(){
   		this.createdAt = new Date();

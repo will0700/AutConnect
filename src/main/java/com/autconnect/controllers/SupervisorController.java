@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.autconnect.models.Client;
 import com.autconnect.models.User;
@@ -25,7 +26,7 @@ public class SupervisorController {
 	@Autowired UserValidator userValidator;
 	@Autowired TherapistClientService therapistClientService;
 	
-	@GetMapping("/supervisor/")
+	@GetMapping("/supervisor")
     public String supervisorDashboard(Principal principal, Model model) {
     	String email = principal.getName();
         model.addAttribute("currentUser", userService.findByEmail(email));
@@ -56,7 +57,7 @@ public class SupervisorController {
     @PostMapping("/supervisor/clients/create")
     public String supervisorCreateClientPost(@ModelAttribute("newClient") Client newClient) {
         this.clientService.createClient(newClient);
-    	return "redirect:/supervisor/clients/all";
+    	return "redirect:/supervisor/clients/"+newClient.getId();
     }
     @GetMapping("/supervisor/clients/{id}")
     public String supervisorClient(Principal principal, Model model, @PathVariable("id") Long id) {
@@ -77,20 +78,24 @@ public class SupervisorController {
     }
     
     @GetMapping("/supervisor/clients/{id}/therapists")
-    public String supervisorClientTherapists(Principal principal, Model model, @PathVariable("id") Long id, @ModelAttribute("client") Client client) {
+    public String supervisorClientTherapists(Principal principal, Model model, @PathVariable("id") Long id) {
     	String email = principal.getName();
         model.addAttribute("currentUser", userService.findByEmail(email));
-        model.addAttribute("client", clientService.findById(id));
-        return "supervisorClientTherapists.jsp";
+        Client client = clientService.findById(id);
+        model.addAttribute("client", client);
+        List<User> notTherapists = userService.findNotTherapists(client);
+        model.addAttribute("notTherapists", notTherapists);
+        return "supervisorTherapist.jsp";
     }
-    @GetMapping("/")
-    @PostMapping("/supervisor/clients/{id}/therapists/remove/{tId}")
+    @GetMapping("/supervisor/clients/{id}/therapists/remove/{tId}")
     public String supervisorClientTherapistsRemove(@PathVariable("id") Long cId, @PathVariable("tId") Long tId) {
+    	System.out.println("route was hit");
     	therapistClientService.removeTherapist(cId, tId);
-    	return "redirect:/supervisor/clients/"+cId+"/therapists";
+    	return "redirect:/supervisor/clients/" + cId + "/therapists";
     }
     @PostMapping("/supervisor/clients/{id}/therapists/add")
-    public String supervisorClientTherapistAdd() {
-    	return "";
+    public String supervisorClientTherapistAdd(@PathVariable("id") Long id, @RequestParam(value="therapistsAdded") List<User> newTherapists) {
+    	therapistClientService.addTherapists(id, newTherapists);
+    	return "redirect:/supervisor/clients/" + id + "/therapists";
     }
 }
