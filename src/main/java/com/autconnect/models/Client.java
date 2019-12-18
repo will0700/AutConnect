@@ -55,6 +55,9 @@ public class Client {
     @OneToMany(mappedBy="client", fetch=FetchType.LAZY)
     private List<Behavior> behaviors;
     
+    @OneToMany(mappedBy="client", fetch=FetchType.LAZY)
+    private List<Target> targets;
+    
     
     //Getters and Setters
   	@PrePersist
@@ -118,5 +121,17 @@ public class Client {
 	}
 	public void setParent(User parent) {
 		this.parent = parent;
+	}
+	public List<Behavior> getBehaviors() {
+		return behaviors;
+	}
+	public void setBehaviors(List<Behavior> behaviors) {
+		this.behaviors = behaviors;
+	}
+	public List<Target> getTargets() {
+		return targets;
+	}
+	public void setTargets(List<Target> targets) {
+		this.targets = targets;
 	}
 }

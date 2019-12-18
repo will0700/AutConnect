@@ -12,7 +12,7 @@
 <body>
 	<h3>Client Icon</h3>
 	<div>
-		<a href = "/supervisor/clients/${client.id}/therapist">Therapist</a>
+		<a href = "/supervisor/clients/${client.id}/therapists">Therapist</a>
 	</div>
 	<div>
 		<a href = "/supervisor/clients/${client.id}/targetGoal">Target Goals</a>
