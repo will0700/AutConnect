@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 @Entity
@@ -25,6 +27,7 @@ public class Behavior {
 	private String commentAttention;
 	private Long percentEscape;
 	private String commentEscape;
+	private String session;
 	
 	@Column(updatable=false)
     private Date createdAt;
@@ -36,6 +39,14 @@ public class Behavior {
 
 
     //Getters and Setters
+    @PrePersist
+  	protected void onCreate(){
+  		this.createdAt = new Date();
+    }
+    @PreUpdate
+    protected void onUpdate(){
+    	this.updatedAt = new Date();
+    }
 	public Long getId() {
 		return id;
 	}
@@ -114,5 +125,13 @@ public class Behavior {
 
 	public void setClient(Client client) {
 		this.client = client;
+	}
+
+	public String getSession() {
+		return session;
+	}
+
+	public void setSession(String session) {
+		this.session = session;
 	}
 }
