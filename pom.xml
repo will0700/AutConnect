@@ -73,6 +73,11 @@
 	        <groupId>org.springframework.boot</groupId>
 	        <artifactId>spring-boot-starter-security</artifactId>
 	    </dependency>
+	    <dependency>
+		    <groupId>fr.avianey.apache-xmlgraphics</groupId>
+		    <artifactId>batik</artifactId>
+		    <version>1.8</version>
+		</dependency>
 	</dependencies>
 
 	<build>

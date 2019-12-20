@@ -8,61 +8,78 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
- 	<link rel="stylesheet" href='<c:url value="/css/register.css"/>' type="text/css"/>
-	<script type="text/javascript" src="js/myscript.js"></script>
 	<meta charset="UTF-8">
-<title>Register</title>
+		 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+		  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+		  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		  <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+<%--  		  <link rel="stylesheet" href='<c:url value="/css/register.css"/>' type="text/css"/>
+ --%>		  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Register</title>
+	
 </head>
-<body>
-	<form id="logoutForm" method="POST" action="/logout">
-       <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-       <input type="submit" value="Logout!" />
-   </form>
-    <h1 class = "title">AutConnect</h1>
-    	<div class="container">
-		    <form:form action="/register" method="POST" modelAttribute="user">
-				<div class ="role">
-				<div class="radio">	
-						<input type="radio" name="role" value="parent">Parent
-					</div>	
-					<div class="radio">
-						<input type="radio" name="role" value="supervisor">Supervisor
-					</div>
-					<div class="radio">	
-						<input  type="radio" name="role" value="therapist">Therapist
-					</div>
-					
-		</div>
-				<div class ="">
-					<form:label  path="email"></form:label>
-					<form:errors path="email" />
-					<form:input class="reg" path="email" type="email" placeholder="email@domain.com"/>
+<div class="container">
+		<body style="background-color:#616161; margin-top:10%">
+		<form id="logoutForm" method="POST" action="/logout">
+ 			<div class="row">
+			<div class="col s12 m8 offset-m3">
+			<div class="card" style="background: rgba(0, 0, 0, .4)">
+		       <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+<!-- 		       <input type="submit" value="Logout!" />
+ -->		   </form>
+		    <h3 class = "center-align">AutConnect</h3>
+		    	<div class="container">
+				    <form:form action="/register" method="POST" modelAttribute="user">
+						<div >
+							<div>
+								<label>
+									<input class="with-gap" type="radio" name="role" value="parent">
+									<span>Parent</span>
+								</label>
+							</div>
+							<div>
+								<input type="radio" checked name="role" value="supervisor">
+								<label>Supervisor</label>
+							</div>
+							<div>
+								<input  type="radio" name="role" value="therapist">
+								<label>Therapist</label>
+							</div>
+						</div>
+						<div class ="">
+							<form:label  path="email"></form:label>
+							<form:errors path="email" />
+							<form:input class="reg" path="email" type="email" placeholder="email@domain.com"/>
+						</div>
+						<div>
+							<form:label  path="firstName"></form:label>
+							<form:errors path="firstName" />
+							<form:input class="reg" path="firstName" type="text" placeholder="First Name"/>
+						</div>
+						<div>
+							<form:label  path="lastName"></form:label>
+							<form:errors path="lastName" />
+							<form:input class="reg" path="lastName" type="text" placeholder="Last Name"/>
+						</div>
+						<div>
+							<form:label path="password"></form:label>
+							<form:errors path="password" />
+							<form:input class="reg" path="password" type="password" placeholder="password"/>
+						</div>
+						<div>
+							<form:label  path="passwordConfirmation"></form:label>
+							<form:errors path="passwordConfirmation" />
+							<form:input class="reg" path="passwordConfirmation" type="password" placeholder="confirm password"/>
+						</div>
+						<input class="button" type="submit" value="Register">
+					</form:form>
 				</div>
-				<div>
-					<form:label  path="firstName"></form:label>
-					<form:errors path="firstName" />
-					<form:input class="reg" path="firstName" type="text" placeholder="First Name"/>
-				</div>
-				<div>
-					<form:label  path="lastName"></form:label>
-					<form:errors path="lastName" />
-					<form:input class="reg" path="lastName" type="text" placeholder="Last Name"/>
-				</div>
-				<div>
-					<form:label path="password"></form:label>
-					<form:errors path="password" />
-					<form:input class="reg" path="password" type="password" placeholder="password"/>
-				</div>
-				<div>
-					<form:label  path="passwordConfirmation"></form:label>
-					<form:errors path="passwordConfirmation" />
-					<form:input class="reg" path="passwordConfirmation" type="password" placeholder="confirm password"/>
-				</div>
-				<input class="button" type="submit" value="Register">
-			</form:form>
-		</div>
-		<h3 class="login">Login</h3>
+			</div>
+			</div>
+			</div>
+		</div>	
+	<%-- 	<h3 class="login">Login</h3>
 		<c:if test="${logoutMessage != null}">
 	        <c:out value="${logoutMessage}"></c:out>
 	    </c:if>
@@ -78,6 +95,6 @@
 			</div>
 	        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	        <input class="button" type="submit" value="Login"/>
-	    </form>
+	    </form> --%>
 </body>
 </html>
