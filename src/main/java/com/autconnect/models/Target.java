@@ -50,4 +50,12 @@ public class Target {
 	public void setGoals(List<Goal> goals) {
 		this.goals = goals;
 	}
+
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
 }

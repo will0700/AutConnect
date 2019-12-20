@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.autconnect.models.Behavior;
+import com.autconnect.models.Goal;
+import com.autconnect.models.Target;
 import com.autconnect.models.User;
 import com.autconnect.services.BehaviorService;
 import com.autconnect.services.ClientService;
+import com.autconnect.services.TargetService;
 import com.autconnect.services.TherapistClientService;
 import com.autconnect.services.UserService;
 
@@ -23,6 +26,7 @@ public class TherapistController {
 	@Autowired TherapistClientService therapistClientService;
 	@Autowired ClientService clientService;
 	@Autowired BehaviorService behaviorService;
+	@Autowired TargetService targetService;
 	
 	@GetMapping("/therapist")
 	public String therapistDashboard(Principal principal, Model model) {
@@ -30,6 +34,7 @@ public class TherapistController {
         model.addAttribute("currentUser", userService.findByEmail(email));
 		return "therapistDashboard.jsp";
 	}
+	
 	@GetMapping("/therapist/pending")
 	public String therapistClientsPending(Principal principal, Model model) {
 		String email = principal.getName();
@@ -38,6 +43,16 @@ public class TherapistController {
         model.addAttribute("pendingClients", therapistClientService.findPending(user));
 		return "therapistPending.jsp";
 	}
+	
+	@GetMapping("/therapist/clients/{id}")
+	public String therapistClient(Principal principal, Model model, @PathVariable(name="id") Long id) {
+		String email = principal.getName();
+		User user = userService.findByEmail(email);
+		model.addAttribute("currentUser", user);
+		model.addAttribute("client", this.clientService.findById(id));
+		return "therapistClient.jsp";
+	}
+
 	@GetMapping("/therapist/clients/{id}/targetGoals")
 	public String therapistTargetGoalsForm(Principal principal, Model model, @PathVariable(name="id") Long id) {
 		String email = principal.getName();
@@ -47,6 +62,25 @@ public class TherapistController {
 		return "therapistTargetGoals.jsp";
 	}
 	
+	@GetMapping("/therapist/clients/{id}/newTarget")
+	public String therapistNewTarget(Principal principal, Model model, @PathVariable(name="id") Long id, @ModelAttribute("newTarget") Target newTarget) {
+		String email = principal.getName();
+		User user = userService.findByEmail(email);
+		model.addAttribute("currentUser", user);
+		model.addAttribute("client", this.clientService.findById(id));
+		return "therapistNewTarget.jsp";
+	}
+	@PostMapping("/therapist/clients/{id}/newTarget")
+	public String therapistNewTarget(@PathVariable(name="id") Long id, @ModelAttribute("newTarget") Target newTarget) {
+		this.targetService.createTarget(newTarget);
+		return "redirect:/therapist/clients/" + id + "/targetGoals";
+	}
+	@GetMapping("/therapist/clients/{cId}/target/{tId}/newGoal")
+	public String therapistNewGoal(@PathVariable(name="cId") Long cId, @PathVariable(name="tId") Long tId, @ModelAttribute("newGoal") Goal newGoal, Model model) {
+		model.addAttribute("client", this.clientService.findById(cId));
+		
+		return "redirect:/therapist/clients/" + cId + "/targetGoals";
+	}
 	@GetMapping("/therapist/clients/{id}/behaviors")
 	public String therapistBehaviorForm(Principal principal, Model model, @ModelAttribute("behavior") Behavior behavior, @PathVariable(name="id") Long id) {
 		String email = principal.getName();

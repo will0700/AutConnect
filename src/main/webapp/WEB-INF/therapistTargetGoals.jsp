@@ -17,6 +17,8 @@
 		<div>
 			<form action="/therapist/clients/${client.id}/targetGoals/process"  method="post">
 			<c:forEach items="${client.targets}" var="target">
+				<p><c:out value="${target.targetName}" /></p>
+				<a href="/therapist/target/${target.id}/newGoal">New Goal</a>
 				<div>
 					<c:forEach items="${target.goals}" var="goal">
 						<div>
@@ -32,7 +34,6 @@
 		</div>
 		<div>
 			<a href="/therapist/clients/${client.id}/newTarget">New Target</a>
-			<a href="/therapist/clients/${client.id}/newGoal">New Goal</a>
 		</div>
 	</body>
 </html>
