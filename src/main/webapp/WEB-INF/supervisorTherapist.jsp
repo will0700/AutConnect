@@ -27,6 +27,7 @@
 	<br>
 	<br>
 	<br>
+	<c:if test="${notTherapists.size()>0}">
 	<div>
 		<h4>Assign therapists</h4>
 		<form action="/supervisor/clients/${client.id}/therapists/add" method="post">
@@ -39,6 +40,7 @@
 			<input type="submit">
 		</form>
 	</div>
+	</c:if>
 		
 		
 </body>

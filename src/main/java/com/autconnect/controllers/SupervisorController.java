@@ -52,6 +52,7 @@ public class SupervisorController {
         model.addAttribute("currentUser", userService.findByEmail(email));
         List<User> allTherapists = userService.findAllTherapists();
         model.addAttribute("therapists", allTherapists);
+        System.out.println(allTherapists);
     	return "supervisorCreateClient.jsp";
     }
     @PostMapping("/supervisor/clients/create")

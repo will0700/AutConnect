@@ -18,9 +18,7 @@ public class Goal {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	
 	private String goalQuestion;
-	
 	private boolean mastered;
 
 	@ManyToOne(fetch=FetchType.LAZY)
