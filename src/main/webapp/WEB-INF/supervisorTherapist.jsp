@@ -30,6 +30,7 @@
 	<c:if test="${notTherapists.size()>0}">
 	<div>
 		<h4>Assign therapists</h4>
+		<c:out value="${error}"/>
 		<form action="/supervisor/clients/${client.id}/therapists/add" method="post">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			<c:forEach items="${notTherapists}" var="notTherapist">

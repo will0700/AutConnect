@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.autconnect.models.Client;
 import com.autconnect.models.User;
@@ -95,8 +96,12 @@ public class SupervisorController {
     	return "redirect:/supervisor/clients/" + cId + "/therapists";
     }
     @PostMapping("/supervisor/clients/{id}/therapists/add")
-    public String supervisorClientTherapistAdd(@PathVariable("id") Long id, @RequestParam(value="therapistsAdded") List<User> newTherapists) {
-    	therapistClientService.addTherapists(id, newTherapists);
+    public String supervisorClientTherapistAdd(RedirectAttributes redirectAttributes, @PathVariable("id") Long id, @RequestParam(value="therapistsAdded", required= false) List<User> newTherapists) {
+    	if(newTherapists!=null) {	
+    		therapistClientService.addTherapists(id, newTherapists);
+    	} else {
+    		redirectAttributes.addFlashAttribute("error", "Please make a selection");
+    	}
     	return "redirect:/supervisor/clients/" + id + "/therapists";
     }
 }
