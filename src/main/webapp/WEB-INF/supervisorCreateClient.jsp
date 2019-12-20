@@ -33,7 +33,10 @@
 			<div>
 				<form:label path="therapists">Therapist</form:label>
 				<form:errors path="therapists" />
-				<form:input path="therapists" type="checkboxes" maxLength="1" /> 
+				<c:forEach items="${therapists}" var="therapist"><br>
+					<form:checkbox path="therapists" value="${therapist.id}"/>
+					<c:out value="${therapist.firstName}" /> <c:out value="${therapist.lastName}" /><br>
+				</c:forEach>
 			</div>
 			<form:input path="supervisor" type="hidden" value="${currentUser.id}" />
 			<input type="submit" value="Create Client">
