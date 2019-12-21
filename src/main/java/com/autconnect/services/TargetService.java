@@ -14,4 +14,8 @@ public class TargetService {
 	public Target createTarget(Target target) {
 		return this.targetRepository.save(target);
 	}
+	
+	public Target getById(Long id) {
+		return this.targetRepository.findById(id).get();
+	}
 }

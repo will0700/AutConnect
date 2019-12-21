@@ -104,4 +104,12 @@ public class SupervisorController {
     	}
     	return "redirect:/supervisor/clients/" + id + "/therapists";
     }
+    @GetMapping("/supervisor/clients/{id}/targetGoals")
+	public String supervisorTargetGoalsForm(Principal principal, Model model, @PathVariable(name="id") Long id) {
+		String email = principal.getName();
+		User user = userService.findByEmail(email);
+		model.addAttribute("currentUser", user);
+		model.addAttribute("client", this.clientService.findById(id));
+		return "supervisorTargetGoals.jsp";
+	}
 }

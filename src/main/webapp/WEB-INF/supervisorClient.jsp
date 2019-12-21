@@ -15,7 +15,7 @@
 		<a href = "/supervisor/clients/${client.id}/therapists">Therapist</a>
 	</div>
 	<div>
-		<a href = "/supervisor/clients/${client.id}/targetGoal">Target Goals</a>
+		<a href = "/supervisor/clients/${client.id}/targetGoals">Target Goals</a>
 	</div>
 	<div>
 		<a href = "/supervisor/clients/${client.id}/bx">Bx</a>
