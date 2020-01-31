@@ -20,4 +20,5 @@ public class DailyNoteService {
 	public List<DailyNote> findByClient(Client client){
 		return this.dailyNoteRepository.findByClient(client);
 	}
+	//test
 }
