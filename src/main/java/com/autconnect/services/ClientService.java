@@ -13,6 +13,7 @@ public class ClientService {
 	@Autowired ClientRepository clientRepository;
 	
 	public Client createClient(Client newClient) {
+		//pull out string,
 		return this.clientRepository.save(newClient);
 	}
 	

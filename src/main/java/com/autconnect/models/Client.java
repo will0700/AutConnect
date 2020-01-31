@@ -58,6 +58,8 @@ public class Client {
     @OneToMany(mappedBy="client", fetch=FetchType.LAZY)
     private List<Target> targets;
     
+    @OneToMany(mappedBy="client", fetch=FetchType.LAZY)
+    private List<DailyNote> dailyNotes;
     
     //Getters and Setters
   	@PrePersist

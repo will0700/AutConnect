@@ -48,7 +48,7 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
         boolean isTherapist = false;
         boolean isParent = false;
         final Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-        System.out.println("anything");
+        
         for (final GrantedAuthority grantedAuthority : authorities) {
             if (grantedAuthority.getAuthority().equals("ROLE_SUPERVISOR")) {
                 isSupervisor = true;
