@@ -20,7 +20,7 @@
 			<br>
 			<a href="/therapist/clients/${client.id}/behaviors">Bx</a>
 			<br>
-			<a href="">Daily Notes (INCOMPLETE)</a>
+			<a href="/therapist/clients/${client.id}/dailyNotes">Daily Notes</a>
 		</div>
 	</body>
 </html>

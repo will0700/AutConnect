@@ -29,7 +29,7 @@ public class SupervisorController {
 	
 	@GetMapping("/supervisor")
     public String supervisorDashboard(Principal principal, Model model) {
-    	String email = principal.getName();
+    	String email = principal.getName(); // "principal.getName()" is analogous to "session.findAttribute("sessionID")"
         model.addAttribute("currentUser", userService.findByEmail(email));
         //Messages needs to be worked on...
     	return "supervisorDashboard.jsp";
@@ -53,17 +53,22 @@ public class SupervisorController {
         model.addAttribute("currentUser", userService.findByEmail(email));
         List<User> allTherapists = userService.findAllTherapists();
         model.addAttribute("therapists", allTherapists);
-        System.out.println(allTherapists);
     	return "supervisorCreateClient.jsp";
     }
     @PostMapping("/supervisor/clients/create")
     public String supervisorCreateClientPost(@ModelAttribute("newClient") Client newClient) {
-        this.clientService.createClient(newClient);
-    	return "redirect:/supervisor/clients/"+newClient.getId();
+        if (this.clientService.createClient(newClient) != null) {
+        	return "redirect:/supervisor/clients/"+newClient.getId();
+        } else {
+        	//if parent's email doesn't exist, service will have returned null for the new client.
+        	//so we need to add flash error handling here and redirect to the create form.
+        	return "redirect:/supervisor/clients/create";
+        }
+    	
     }
     @GetMapping("/supervisor/clients/{id}")
     public String supervisorClient(Principal principal, Model model, @PathVariable("id") Long id) {
-    	String email = principal.getName();
+    	String email = principal.getName(); 
         model.addAttribute("currentUser", userService.findByEmail(email));
         Client client = this.clientService.findById(id);
         if (client == null) {
@@ -91,7 +96,6 @@ public class SupervisorController {
     }
     @GetMapping("/supervisor/clients/{id}/therapists/remove/{tId}")
     public String supervisorClientTherapistsRemove(@PathVariable("id") Long cId, @PathVariable("tId") Long tId) {
-    	System.out.println("route was hit");
     	therapistClientService.removeTherapist(cId, tId);
     	return "redirect:/supervisor/clients/" + cId + "/therapists";
     }

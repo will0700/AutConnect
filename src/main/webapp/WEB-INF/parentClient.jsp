@@ -8,18 +8,18 @@
 <html>
 	<head>
 		<meta charset="ISO-8859-1">
-		<title>Dashboard - AutConnect</title>
+		<title><c:out value="${client.firstInitial}" />.<c:out value="${client.lastInitial}" /> | Autconnect</title>
 	</head>
 	<body>
 		<div>
-			<h2>Dashboard</h2>
-			<c:out value="${user.email}"/>
-			<c:forEach items="${user.roles}" var="role">
-				<c:out value="${role.name}"/>
-			</c:forEach>
-		</div>
-		<div>
-		
+			<div id="navigation">
+				<a href="/parent">Dashboard</a>
+				<a href="/logout">Logout</a>
+			</div>
+			<div id="main">
+				<a href="/parent/messages">Messages</a>
+				<a href="/parent/clients/${client.id}/archives">Archives</a>
+			</div>
 		</div>
 	</body>
 </html>
